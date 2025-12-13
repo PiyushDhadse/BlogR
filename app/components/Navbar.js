@@ -57,8 +57,11 @@ const Navbar = () => {
             {session && (
               <>
                 <p className=" sm:text-xl font-bold text-[#005461]">
-                  {session.user.name}
+                  <Link href={`/${encodeURIComponent(session.user.name)}`}>
+                    {session.user.name}
+                  </Link>
                 </p>
+
                 <button
                   onClick={() => signOut()}
                   className="bg-[#00B7B5] dark:bg-[#00B7B5] text-white font-medium hover:bg-[#00B7B5]/90 px-5 py-2 rounded-md transition-colors duration-200 shadow-sm"
@@ -153,9 +156,12 @@ const Navbar = () => {
                 </li>
                 {session ? (
                   <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 pt-2">
-                    <p className="text-sm font-bold text-[#005461] dark:text-white">
+                    <Link
+                      href={`/${encodeURIComponent(session.user.name)}`}
+                      className="text-sm font-bold text-[#005461] dark:text-white"
+                    >
                       {session.user.name}
-                    </p>
+                    </Link>
                     <button
                       onClick={() => signOut()}
                       className="bg-[#00B7B5] dark:bg-[#00B7B5] text-white font-medium hover:bg-[#00B7B5]/90 px-5 py-2 rounded-md transition-colors duration-200 shadow-sm w-full sm:w-auto"

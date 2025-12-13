@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from "react-icons/fa";
 import { HiMail, HiLockClosed } from "react-icons/hi";
-import { useSession,signIn,signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -11,6 +13,14 @@ const LoginPage = () => {
     password: "",
     rememberMe: false,
   });
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.replace("/dashboard");
+    }
+  }, [status, router]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -50,7 +60,9 @@ const LoginPage = () => {
             <h1 className="text-5xl font-bold tracking-tight">
               Blog<span className="text-[#00B7B5]">R</span>
             </h1>
-            <p className="text-white/80 text-center mt-2">Your Creative Space</p>
+            <p className="text-white/80 text-center mt-2">
+              Your Creative Space
+            </p>
           </div>
 
           {/* Illustration */}
@@ -118,11 +130,21 @@ const LoginPage = () => {
 
           {/* Social Login Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 mb-6">
-            <button onClick={() => alert("GoogleProvider is not included yet , Sorry for inconvenience , You can continue with Github.")} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white border border-[#005461]/20 rounded-xl text-[#005461] font-medium hover:bg-[#E8F6F6] hover:border-[#00B7B5]/30 transition-all duration-300 shadow-sm hover:shadow-md">
+            <button
+              onClick={() =>
+                alert(
+                  "GoogleProvider is not included yet , Sorry for inconvenience , You can continue with Github."
+                )
+              }
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white border border-[#005461]/20 rounded-xl text-[#005461] font-medium hover:bg-[#E8F6F6] hover:border-[#00B7B5]/30 transition-all duration-300 shadow-sm hover:shadow-md"
+            >
               <FaGoogle className="text-[#00857F]" />
               <span className="text-sm">Google</span>
             </button>
-            <button onClick={() => signIn("github")} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white border border-[#005461]/20 rounded-xl text-[#005461] font-medium hover:bg-[#E8F6F6] hover:border-[#00B7B5]/30 transition-all duration-300 shadow-sm hover:shadow-md">
+            <button
+              onClick={() => signIn("github")}
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white border border-[#005461]/20 rounded-xl text-[#005461] font-medium hover:bg-[#E8F6F6] hover:border-[#00B7B5]/30 transition-all duration-300 shadow-sm hover:shadow-md"
+            >
               <FaGithub className="text-[#00857F]" />
               <span className="text-sm">GitHub</span>
             </button>
@@ -131,7 +153,9 @@ const LoginPage = () => {
           {/* Divider */}
           <div className="flex items-center gap-4 mb-6">
             <div className="flex-1 h-px bg-linear-to-r from-transparent via-[#005461]/20 to-[#005461]/20" />
-            <span className="text-[#00857F] text-sm font-medium">or continue with email</span>
+            <span className="text-[#00857F] text-sm font-medium">
+              or continue with email
+            </span>
             <div className="flex-1 h-px bg-linear-to-l from-transparent via-[#005461]/20 to-[#005461]/20" />
           </div>
 
@@ -229,12 +253,12 @@ const LoginPage = () => {
                 </span>
               </label>
 
-              <a
+              <Link
                 href="/forgot-password"
                 className="text-sm text-[#00857F] hover:text-[#005461] font-medium transition-colors hover:underline underline-offset-2"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
 
             {/* Submit Button */}
@@ -293,24 +317,24 @@ const LoginPage = () => {
           {/* Sign Up Link */}
           <p className="mt-8 text-center text-[#005461]">
             Don&apos;t have an account?{" "}
-            <a
+            <Link
               href="/signup"
               className="font-semibold text-[#00857F] hover:text-[#00B7B5] transition-colors hover:underline underline-offset-2"
             >
               Create an account
-            </a>
+            </Link>
           </p>
 
           {/* Footer */}
           <p className="mt-8 text-center text-xs text-[#00857F]/70">
             By signing in, you agree to our{" "}
-            <a href="/terms" className="underline hover:text-[#005461]">
+            <Link href="/terms" className="underline hover:text-[#005461]">
               Terms of Service
-            </a>{" "}
+            </Link>{" "}
             and{" "}
-            <a href="/privacy" className="underline hover:text-[#005461]">
+            <Link href="/privacy" className="underline hover:text-[#005461]">
               Privacy Policy
-            </a>
+            </Link>
           </p>
         </div>
       </div>

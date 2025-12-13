@@ -246,7 +246,7 @@ const ProfilePage = ({ params }) => {
           <div className="absolute -bottom-12 right-4 sm:right-8 flex items-center gap-2">
             {user.isOwnProfile ? (
               <button
-                onClick={() => router.push("/settings/profile")}
+                onClick={() => router.push("/dashboard")}
                 className="px-4 sm:px-6 py-2 bg-white border-2 border-[#005461] text-[#005461] font-semibold rounded-xl hover:bg-[#005461] hover:text-white transition-all duration-300 flex items-center gap-2 shadow-sm"
               >
                 <FaEdit className="w-4 h-4" />
@@ -344,7 +344,7 @@ const ProfilePage = ({ params }) => {
           </div>
 
           {/* Username */}
-          <p className="text-[#00857F] font-medium mt-1">@{user.username}</p>
+          <p className="text-[#00857F] font-medium mt-1">@{username}</p>
 
           {/* Bio */}
           <p className="mt-4 text-[#004550] leading-relaxed max-w-2xl">

@@ -1,10 +1,20 @@
+"use client";
 import React, { useState } from "react";
+import { useSession,signIn,signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const { data: session } = useSession();
+
   const [activeTab, setActiveTab] = useState("profile");
   const [isSaving, setIsSaving] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+
+  if(!session){
+    const router = useRouter()
+    router.push("/login")
+  }
 
   // Profile form state
   const [profile, setProfile] = useState({
