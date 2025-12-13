@@ -9,6 +9,14 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      if(account.provider = "github"){
+        // connect to the database
+        const client = mongoose.connect()
+      }
+    },
+  },
 };
 export const GET = NextAuth(authOptions);
 export const POST = NextAuth(authOptions);
