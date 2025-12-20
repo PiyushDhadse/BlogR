@@ -17,7 +17,7 @@ const Navbar = () => {
   // }
 
   return (
-    <div className="container flex justify-center min-w-screen border bg-[#F4F4F4] dark:bg-gray-900 dark:border-gray-800">
+    <div className="container flex justify-center min-w-[99vw] border bg-[#F4F4F4] dark:bg-gray-900 dark:border-gray-800">
       <nav className="container mx-auto px-4">
         {/* Desktop Navbar */}
         <div className="hidden md:flex items-center justify-between py-3">
