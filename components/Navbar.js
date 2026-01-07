@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
 
   // if (session) {
   //   return (
@@ -41,10 +43,10 @@ const Navbar = () => {
               <Link href="/contact">Contact</Link>
             </li>
             <li>
-              <Link href="/">
+              <Link href="/new">
                 {" "}
                 {/* Assuming new links to the root or a new post page */}
-                <div className="createnew flex items-center gap-2 bg-[#005461] dark:bg-[#00B7B5] text-white font-semibold rounded-md p-2 px-4 hover:bg-[#005461]/90 dark:hover:bg-[#00B7B5]/90 hover:cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md">
+                <div onClick={()=>router.push("/new")} className="createnew flex items-center gap-2 bg-[#005461] dark:bg-[#00B7B5] text-white font-semibold rounded-md p-2 px-4 hover:bg-[#005461]/90 dark:hover:bg-[#00B7B5]/90 hover:cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md">
                   New
                   <img className="h-6" src="./edit1.gif" alt="" />
                 </div>
